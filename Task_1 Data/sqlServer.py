@@ -48,7 +48,7 @@ def parse_ruby_hash_file(filepath: str) -> list[dict]:
     if not records:
         raise ValueError("No records were parsed from the file.")
 
-    print(f"    ✓ Parsed {len(records)} records")
+    print(f"  Parsed {len(records)} records")
     return records
 
 
