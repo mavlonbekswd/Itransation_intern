@@ -1,6 +1,5 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 import math
-
 
 def calculate_lcm(x, y):
     try:
@@ -20,8 +19,9 @@ app = Flask(__name__)          # create the web server
 def lcm_endpoint():            # run this function
     x = request.args.get("x")  # get x from the URL  (?x=4)
     y = request.args.get("y")  # get y from the URL  (?y=6)
-    return calculate_lcm(x, y)  # return the answer
-
+    response = make_response(calculate_lcm(x, y))
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
+    return response
 
 if __name__ == "__main__":
     app.run(debug=False)
