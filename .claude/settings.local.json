@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Applications/**)",
+      "Bash(brew list *)",
+      "Bash(brew services *)",
+      "Read(//Users/user/Library/Logs/Homebrew/postgresql@17/**)",
+      "Bash(psql -U postgres -c \"\\\\l\")",
+      "Bash(/Library/PostgreSQL/18/bin/psql --version)",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -c \"\\\\l\")",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -c \"\\\\dn\")",
+      "Bash(DATABASE_URL=postgresql://postgres:w3soox1mm@localhost:5432/fakegen bash setup.sh)",
+      "Bash(kill 5388 6312)",
+      "Bash(DATABASE_URL=postgresql://postgres:w3soox1mm@localhost:5432/fakegen python app.py)",
+      "Bash(curl -s \"http://localhost:5000/?locale=en-US&seed=44\")",
+      "Bash(curl -s \"http://localhost:5000/api/users?locale=en-US&seed=44&batch=0\")",
+      "Bash(curl -s \"http://127.0.0.1:5000/\")",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -c \"SELECT locale, category, COUNT\\(*\\) FROM fake.lookup GROUP BY locale, category ORDER BY locale, category;\")",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -f db/01_schema.sql)",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -f db/02_procedures.sql)",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -f db/03_seed_data.sql)",
+      "Bash(psql -U postgres -d fakegen -c ' *)",
+      "Bash(PGPASSWORD='w3soox1mm' psql -U postgres -d fakegen -c \"SELECT fake.benchmark\\('en-US', 42, 200\\) AS users_per_second;\")",
+      "Bash(pkill -f \"python app.py\")",
+      "Bash(curl -s http://127.0.0.1:5000/)",
+      "Bash(pip install *)",
+      "Bash(python make_docs.py)",
+      "Bash(psql \"postgresql://postgres:LKXbJEXsvHzyuUlmwtqwjAmUbCPqtPAL@roundhouse.proxy.rlwy.net:57113/railway\" -f db/01_schema.sql)",
+      "Bash(psql \"postgresql://postgres:LKXbJEXsvHzyuUlmwtqwjAmUbCPqtPAL@roundhouse.proxy.rlwy.net:57113/railway\" -c \"\\\\conninfo\")",
+      "Bash(PGCONNECT_TIMEOUT=15 psql \"postgresql://postgres:LKXbJEXsvHzyuUlmwtqwjAmUbCPqtPAL@roundhouse.proxy.rlwy.net:57113/railway?connect_timeout=15\" -c \"SELECT 1 AS connected;\")",
+      "Bash(echo \"EXIT:$?\")"
+    ]
+  }
+}

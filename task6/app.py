@@ -101,3 +101,5 @@ def api_benchmark():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
