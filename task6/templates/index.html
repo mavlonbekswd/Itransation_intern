@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fake User Generator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<header>
+  <h1>Fake User Generator</h1>
+  <p class="subtitle">Deterministic fake data powered by PostgreSQL stored procedures</p>
+</header>
+
+<main>
+  <!-- ── Controls ── -->
+  <form method="get" action="/" class="controls">
+    <div class="control-group">
+      <label for="locale">Locale</label>
+      <select name="locale" id="locale">
+        {% for code, label in locales %}
+        <option value="{{ code }}" {% if code == locale %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="seed">Seed</label>
+      <input type="number" name="seed" id="seed" value="{{ seed }}" min="0" max="2147483647" />
+    </div>
+
+    <input type="hidden" name="batch" value="0" />
+
+    <button type="submit" class="btn btn-primary">Generate</button>
+  </form>
+
+  <!-- ── Error ── -->
+  {% if error %}
+  <div class="error-box">
+    <strong>Database error:</strong> {{ error }}
+  </div>
+  {% endif %}
+
+  <!-- ── Batch nav ── -->
+  {% if users %}
+  <div class="batch-nav">
+    <span class="batch-info">Batch #{{ batch }} &nbsp;|&nbsp; Records {{ batch * 10 + 1 }}–{{ batch * 10 + 10 }}</span>
+    <div class="nav-buttons">
+      {% if batch > 0 %}
+      <a class="btn btn-nav" href="/?locale={{ locale }}&seed={{ seed }}&batch={{ batch - 1 }}">← Previous</a>
+      {% endif %}
+      <a class="btn btn-nav" href="/?locale={{ locale }}&seed={{ seed }}&batch={{ batch + 1 }}">Next →</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ── User cards ── -->
+  <div class="user-grid">
+    {% for u in users %}
+    <div class="card">
+      <div class="card-header">
+        <span class="card-num">#{{ batch * 10 + u.pos }}</span>
+        <span class="card-name">{{ u.name }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="field-row">
+          <span class="field-icon">📍</span>
+          <div class="field-value address">{{ u.address | replace('\n', '<br>') | safe }}</div>
+        </div>
+
+        <div class="field-row">
+          <span class="field-icon">🌐</span>
+          <span class="field-value mono">{{ u.geo }}</span>
+        </div>
+
+        <div class="field-row">
+          <span class="field-icon">📞</span>
+          <span class="field-value">{{ u.phone }}</span>
+        </div>
+
+        <div class="field-row">
+          <span class="field-icon">✉️</span>
+          <span class="field-value mono">{{ u.email }}</span>
+        </div>
+
+        <div class="physical-grid">
+          {% for label, val in u.physical_items %}
+          <div class="phys-item">
+            <span class="phys-label">{{ label }}</span>
+            <span class="phys-val">{{ val }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- ── Benchmark link ── -->
+  {% if users %}
+  <div class="bench-hint">
+    <a href="/api/benchmark?locale={{ locale }}&seed={{ seed }}&n_batches=200" target="_blank" class="btn btn-secondary">
+      Run benchmark (2 000 users)
+    </a>
+    <a href="/api/users?locale={{ locale }}&seed={{ seed }}&batch={{ batch }}" target="_blank" class="btn btn-secondary">
+      Raw JSON
+    </a>
+  </div>
+  {% endif %}
+</main>
+
+<footer>
+  <p>Data generated deterministically by <code>fake.generate_users(locale, seed, batch_index, batch_size)</code> in PostgreSQL</p>
+</footer>
+</body>
+</html>

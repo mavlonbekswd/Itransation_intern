@@ -1,0 +1,174 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  color: #fff;
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+}
+header h1 { font-size: 2rem; letter-spacing: -.5px; }
+header .subtitle { opacity: .65; margin-top: .4rem; font-size: .9rem; }
+
+/* ── Main container ── */
+main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+/* ── Controls form ── */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: flex-end;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  margin-bottom: 1.25rem;
+}
+.control-group { display: flex; flex-direction: column; gap: .35rem; }
+.control-group label { font-size: .8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: .05em; }
+select, input[type=number] {
+  border: 1.5px solid #d0d5dd;
+  border-radius: 8px;
+  padding: .5rem .75rem;
+  font-size: .95rem;
+  outline: none;
+  background: #fafafa;
+  transition: border-color .15s;
+}
+select:focus, input[type=number]:focus { border-color: #0f3460; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 8px;
+  padding: .55rem 1.2rem;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .15s, transform .1s;
+}
+.btn:hover { opacity: .88; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary  { background: #0f3460; color: #fff; }
+.btn-nav      { background: #e8eaf0; color: #1a1a2e; }
+.btn-secondary { background: #f3f4f6; color: #333; border: 1.5px solid #d0d5dd; }
+
+/* ── Error box ── */
+.error-box {
+  background: #fff0f0;
+  border: 1.5px solid #f5c6cb;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  color: #842029;
+  margin-bottom: 1rem;
+  font-size: .9rem;
+  font-family: monospace;
+}
+
+/* ── Batch nav ── */
+.batch-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.batch-info { font-size: .85rem; color: #666; font-weight: 500; }
+.nav-buttons { display: flex; gap: .5rem; }
+
+/* ── User grid ── */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+/* ── Card ── */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+
+.card-header {
+  background: linear-gradient(90deg, #0f3460, #1a5276);
+  color: #fff;
+  padding: .8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.card-num {
+  background: rgba(255,255,255,.2);
+  border-radius: 6px;
+  padding: .15rem .5rem;
+  font-size: .75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.card-name { font-weight: 700; font-size: 1rem; }
+
+.card-body { padding: 1rem; display: flex; flex-direction: column; gap: .65rem; }
+
+/* ── Field rows ── */
+.field-row {
+  display: flex;
+  gap: .6rem;
+  align-items: flex-start;
+}
+.field-icon { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
+.field-value { font-size: .88rem; line-height: 1.5; color: #333; }
+.field-value.address { line-height: 1.6; }
+.field-value.mono { font-family: 'SF Mono', 'Consolas', monospace; font-size: .82rem; color: #1a5276; }
+
+/* ── Physical attributes grid ── */
+.physical-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .4rem;
+  background: #f7f8fa;
+  border-radius: 8px;
+  padding: .65rem .75rem;
+}
+.phys-item { display: flex; flex-direction: column; gap: .1rem; }
+.phys-label { font-size: .7rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .05em; }
+.phys-val   { font-size: .9rem; color: #1a1a2e; font-weight: 500; }
+
+/* ── Benchmark hint ── */
+.bench-hint {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: .8rem;
+  color: #aaa;
+}
+footer code { background: #eee; padding: .15rem .4rem; border-radius: 4px; font-size: .78rem; }
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  header h1 { font-size: 1.4rem; }
+  .user-grid { grid-template-columns: 1fr; }
+  .controls { flex-direction: column; }
+}
